@@ -127,6 +127,9 @@ nav {
   padding: 6rem 3rem 4rem;
   position: relative;
   overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 4rem;
 
   &-grid-bg {
     position: absolute;
@@ -159,7 +162,86 @@ nav {
 
   &-content {
     position: relative;
-    max-width: 780px;
+    max-width: 600px;
+    flex: 1;
+  }
+
+  &-visual {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-image-wrap {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 60%, transparent 100%);
+
+    // Glow hinter dem Bild
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    // Dezenter zweiter Glow
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle, rgba(13, 115, 119, 0.2) 0%, transparent 60%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+  }
+
+  &-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.05) contrast(1.02);
+  }
+
+  // Floating Badge oben rechts am Bild
+  &-image-badge {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 2s infinite;
+    }
   }
 
   &-tag {
@@ -189,7 +271,7 @@ nav {
   &-name {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
     margin-bottom: 1.5rem;
@@ -218,11 +300,11 @@ nav {
   }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.3; }
+// Floating Animation für den Glow hinterm Bild
+@keyframes float {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.1); opacity: 0.8; }
 }
-
 // ============================================
 // BUTTONS
 // ============================================
@@ -708,8 +790,34 @@ footer {
     padding: 4rem 1.5rem;
   }
 
-  .hero {
+   .hero {
+    flex-direction: column-reverse; // Bild oben, Text unten
+    gap: 2.5rem;
+    text-align: center;
     padding: 6rem 1.5rem 4rem;
+
+    &-content {
+      max-width: 100%;
+    }
+
+    &-tag {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &-buttons {
+      justify-content: center;
+    }
+
+    &-image-wrap {
+      width: 220px;
+      height: 220px;
+    }
   }
 
   .about-grid {
@@ -723,4 +831,4 @@ footer {
   .contact-box {
     padding: 2rem 1.5rem;
   }
-}
+}/* You can add global styles to this file, and also import other style files */
